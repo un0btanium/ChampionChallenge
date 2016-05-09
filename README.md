@@ -60,10 +60,18 @@ Summoners can enter challenges which run for a limited amount of time. Currently
 ```
 node newChallenge.js
 ```
-for a new challenge to start. As a future feature, this should be automated via a scheduler and challenges should run 3-4 days.
-Each challenge features 5 different champions. Once a player has entered a challenge, he has to play games with one of the featured champions and earn mastery points with them. The summoners at the of the challenge with the most points are the winners and featured on a leaderboard in.
+for the current challenge to end and a new one to start. As a future feature, this would be cool being automated via a scheduler. Challenges should run around 2-5 days.
+Each challenge features 5 different champions. Once a player has entered a challenge, he has to play games with one of the featured champions and earn mastery points with them. The summoners with the most points get featured on a leaderboard on the homepage site.
+The website offers players to search their (or others) summoner names. Each summoner has a profile created and can be updated via an 'Update' button by the user (which currently has a cooldown of 30 minutes).
 
-The website offers players to search their (or others) summoner names. Each summoner has a profile created in the database and can be updated via an 'Update' button by the user (which currently has a cooldown of 30 minutes). Each user has their current and last challenge points and ranks shown as well as achievements in form of items.
+Each user has their current and last challenge points and ranks shown as well as achievements in form of items. Achievements are only given out to the top 250 ranked summoners and the top 10 receive a rare golden version of the item. Achievements who cost less gold in-game are usually more rare to show up in challenges. Which means that having a Healthpotion as an achievment is super rare. In addition these achievements keep track of rank, champion and points the summoner had when he unlocked the achievement.
+
+So once a player has played a couple of games, he can update his profile and gains the champion mastery points earned. Since every summoner starts each challenge at zero points, it creates a fresh and fair competitive stage for everybody race to the top.
+
+Since five champions are featured, you are able to group up as 5 and gain extra champion mastery points through the party bonus. Performing well and winning the game makes the summoner climb the ladder.
+
+The five champions are being selected with the help of the roles of the champions. This allows to viable teams and more fun as a team.
+
 
 
 
