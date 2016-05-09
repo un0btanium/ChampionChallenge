@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+	head
+		meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+		title= title
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
+		script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+	body(class="background-color" ng-app="")
+		div(id="wrap")
+			div(id="main" class="container clear-top")
+				nav(class="navbar navbar-default navbar-color")
+					div(class="container-fluid")
+						div(class="navbar-header")
+							button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-bar" aria-expanded="false")
+								span(class="sr-only")='Toogle menu'
+								span(class="icon-bar")
+								span(class="icon-bar")
+								span(class="icon-bar")
+						div(class="collapse navbar-collapse" id="main-nav-bar")
+							ul(class="nav navbar-nav")
+								li
+									a(href="/") HOME
+								li
+									a(href="/faq") FAQ
+							form(class="navbar-form navbar-left" role="form" id="form" action="/" method="post")
+								div(class="input-group")
+									div(class="form-group")
+										input(class="form-control" type="text" name="summonername" placeholder="Summoner Name" id="summoner-name-input" value="" ng-model="selected" autocomplete="off" maxlength="24")
+									div(class="form-group")
+										select(class="form-control" name="region")
+											option(value="0") EUW
+											option(value="1") NA
+											option(value="2") EUNE
+											option(value="3") BR
+											option(value="4") JP
+											option(value="5") KR
+											option(value="6") TR
+											option(value="7") RU
+											option(value="8") LAN
+											option(value="9") LAS
+											option(value="10") OCE
+									div(class="input-group-btn")
+										button(class="btn btn-primary" id="button-input" type="submit")
+											span(class="glyphicon glyphicon-search")
+				block content
+		footer(class="footer")
+			div(class="container")
+				p(class="text-muted") Champion Challenge isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing <i>League of Legends</i>. <i>League of Legends</i> and Riot Games are trademarks or registered trademarks of Riot Games, Inc. <i>League of Legends</i> © Riot Games, Inc.
+script(src='/lib/angular/angular.js')
+script(src='/application.js')

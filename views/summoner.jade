@@ -1,0 +1,114 @@
+extends layout
+
+block content
+	div(id="cooldown-alert-wrapper")
+		div(class="collapse" id="cooldown-alert")
+			div(class="alert alert-danger" role="alert")
+				span(class="glyphicon glyphicon-time")
+				span <strong> Checked cooldowns!</strong> This summoner has been updated recently. Please wait till available again :)
+
+	hr
+	hr
+
+	div(class="profile-body profile-body-color")
+		div(class="fade-in")
+			form(class="form-inline" role="form" id="form_update" action="/summoner/" + regions[summoner.region] + "/" + summoner.namel + "/update" method="get")
+				if summoner.challenge.current.start[0] == -1
+					button(class="btn btn-success update-button" type="submit")
+						span(class="enter-challenge-button-text-color glyphicon glyphicon glyphicon-log-in")
+						span(class="enter-challenge-button-text-color") <strong> Enter challenge</strong>
+				else if updateAvailable
+					button(class="btn btn-primary update-button" type="submit")
+						span(class="glyphicon glyphicon-refresh")
+						span <strong> Update</strong>
+				else
+					button(type="button" class="btn btn-danger update-button" data-toggle="collapse" data-target="#cooldown-alert" aria-expanded=false aria-controls="#cooldown-alert")
+						span(class="glyphicon glyphicon-refresh")
+						span <strong> Update</strong>
+			div(class="image-with-text")
+				img(class="img-rounded summoner-icon" src=iconurl alt='Summoner Icon')
+				div(class="image-with-text-container")
+					span(class="image-with-text-region")= regions[summoner.region]
+			h1(class="summoner-name summoner-name-color")= summoner.name
+			if (summoner.title != 0)
+				p(class="summoner-title summoner-title-color") #{champions[summoner.title].title}
+			else
+				p(class="summoner-title summoner-title-color") the Newest Challenger
+
+	hr
+	hr
+
+	div(class="challenge-header challenge-header-color")
+		h1(class="challenge-header-text challenge-header-text-color fade-in") CURRENT CHALLENGE
+	div(class="challenge-body challenge-body-color")
+		div(class="challenge-container fade-in")
+			if summoner.challenge.current.start[0] == -1
+				h1(class="challenge-not-entered-text") Enter challenge
+			else
+				- var i = 0
+				each championNum in challenges.champions.current
+					div(class="champion-container champion-container-color champion-container-border-" + i)
+						div(class="image-with-text")
+							img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+							div(class="image-with-text-container")
+								span(class="image-with-text-champion") #{champions[championNum].name}
+						div(class="champion-container-stats")
+							p(class="champion-points")= summoner.challenge.current.points[i]
+							if summoner.challenge.current.rank[i] != 0
+								p(class="champion-rank")= "#" + summoner.challenge.current.rank[i]
+							- i = i + 1
+
+	hr
+	hr
+
+	div(class="challenge-header challenge-header-color")
+		h1(class="challenge-header-text challenge-header-text-color fade-in") PREVIOUS CHALLENGE RESULTS
+	div(class="challenge-body challenge-body-color")
+		div(class="challenge-container fade-in")
+			- var i = 0
+			each championNum in challenges.champions.last
+				div(class="champion-container champion-container-color champion-container-border-" + i)
+					div(class="image-with-text")
+						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+						div(class="image-with-text-container")
+							span(class="image-with-text-champion") #{champions[championNum].name}
+					div(class="champion-container-stats")
+						p(class="champion-points")= summoner.challenge.last.points[i]
+						if summoner.challenge.last.rank[i] > 0
+							p(class="champion-rank")= "#" + summoner.challenge.last.rank[i]
+						- i = i + 1
+
+	hr
+	hr
+
+
+	div(class="challenge-header challenge-header-color")
+		h1(class="challenge-header-text challenge-header-text-color fade-in") ACHIEVEMENTS
+	div(class="challenge-body challenge-body-color")
+		div(class="challenge-container fade-in")
+			if summoner.achievements.length > 0
+				each achievement in summoner.achievements
+					- var item = items[achievement.i];
+					if achievement.r <= 10
+						div(class="achievement-container achievement-golden")
+							div(class="achievement-top") ##{achievement.r}
+							div(class="item-icon-shadow")
+							img(class="img-rounded item-icon" src=itemurl + item.version + "/img/item/" + item.id + ".png" alt='Item Icon')
+							div(class="achievement-bottom")
+								div
+									p #{champions[achievement.c].name}
+									p #{achievement.p}
+					else
+						div(class="achievement-container achievement-normal")
+							div(class="achievement-top") ##{achievement.r}
+							div(class="item-icon-shadow")
+							img(class="img-rounded item-icon" src=itemurl + item.version + "/img/item/" + item.id + ".png" alt='Item Icon')
+							div(class="achievement-bottom")
+								div
+									p #{champions[achievement.c].name}
+									p #{achievement.p}
+			else
+				h1(class="challenge-not-entered-text") No achievements yet
+
+	hr
+	hr 

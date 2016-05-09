@@ -1,0 +1,6 @@
+{
+	"apikey":"YOUR_API_KEY_GOES_HERE",
+	"region":"euw",
+	"rateLimitPer10s": 1500,
+	"rateLimitPer10min": 90000
+}

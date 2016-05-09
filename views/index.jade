@@ -1,0 +1,107 @@
+extends layout
+
+block content
+	div(class="carousel slide" data-ride="carousel" id="main-carousel" data-interval="10042")
+		ol(class="carousel-indicators")
+			li(data-target="#main-carousel" data-slide-to="0" class="active")
+			li(data-target="#main-carousel" data-slide-to="1")
+			li(data-target="#main-carousel" data-slide-to="2")
+		div(class="carousel-inner" role="listbox")
+			div(class="item active")
+				div(class="carousel-item-content-container")
+					div(class="carousel-item-content")
+						img(src="/images/badges.png")
+				div(class="carousel-caption")
+					h1 Welcome to <i>Champion Challenge</i>
+					p Enter now and challenge summoners all over the world!
+					form(class="form-inline form-margin" role="form" id="form" action="/" method="post")
+						div(class="input-group")
+							div(class="form-group")
+								input(class="form-control" type="text" name="summonername" placeholder="Summoner Name" id="summoner-name-input" value="" ng-model="selected" autocomplete="off" maxlength="24")
+							div(class="form-group")
+								select(class="form-control" name="region")
+									option(value="0") EUW
+									option(value="1") NA
+									option(value="2") EUNE
+									option(value="3") BR
+									option(value="4") JP
+									option(value="5") KR
+									option(value="6") TR
+									option(value="7") RU
+									option(value="8") LAN
+									option(value="9") LAS
+									option(value="10") OCE
+							div(class="input-group-btn")
+								button(class="btn btn-primary" id="button-input" type="submit")
+									span(class="glyphicon glyphicon-search")
+			div(class="item")
+				div(class="carousel-item-content-container")
+					div(class="carousel-item-content")
+						each championNum in challenges.champions.current
+							img(class="img-rounded champion-icon carousel-icon" src=championurl + champions[championNum].key + ".png" alt="Champion Image")
+				div(class="carousel-caption")
+					h1 No registration required!
+					p Search your summoner name and simply enter the current challenge.<br>Play games with the champions in rotation and earn as many champion mastery points as possible.
+			div(class="item")
+				div(class="carousel-item-content-container")
+					div(class="carousel-item-content")
+						each itemNum in challenges.items.current
+							div(class="carousel-item-element")
+								div(class="carousel-item-icon-shadow")
+								img(class="img-rounded carousel-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[itemNum].id + ".png" alt='Item Icon')
+				div(class="carousel-caption")
+					h1 Collect achievements
+					p Come back after you played your games and update your profile, points and estimated rank.<br>At the end of the challenge the top #{challenges.limit} ranks receive an item which keeps track of your performance.<br>The top 10 ranks are rewarded with an rare golden version of the item.
+
+		a(class="left carousel-control" href="#main-carousel" role="button" data-slide="prev")
+			span(class="glyphicon glyphicon-chevron-left" aria-hidden="true")
+			span(class="sr-only") Previous
+		a(class="right carousel-control" href="#main-carousel" role="button" data-slide="next")
+			span(class="glyphicon glyphicon-chevron-right" aria-hidden="true")
+			span(class="sr-only") Next
+
+
+	div(class="results-header")
+		h1(class="results-header-text") LAST CHALLENGE FINAL PLACEMENTS
+	div(class="leaderboard-container")
+		- var i = 0; 
+		each challenge in challenges.winners
+			if (challenge.length > 0)
+				div(class="col-md-6")
+					div(class="leaderboard-header")
+						div(class="leaderboard-header-element")
+							div(class="image-with-text")
+								img(class="img-rounded champion-icon" src=championurl + champions[challenges.champions.last[i]].key + ".png" alt='Champion Icon')
+								div(class="image-with-text-container")
+									span(class="image-with-text-champion") #{champions[challenges.champions.last[i]].name}
+						div(class="leaderboard-header-element")
+							div(class="leaderboard-item-icon-shadow")
+							img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.last[i]].id + ".png" alt='Item Icon')
+					table(class="table table-striped")
+						thead
+							tr
+								th(class="col-md-1") Rank
+								th(class="col-md-2") Summoner
+								th(class="col-md-1") Region
+								th(class="col-md-1") Points
+						tbody
+							each summoner in challenge
+								tr
+									td ##{summoner.challenge.last.rank[i]}
+									td #{summoner.name}
+									td(class="leaderboard-region") #{regions[summoner.region]}
+									td #{summoner.challenge.last.points[i]}
+			- i++;
+		div(class="upcomming-challenge col-md-6")
+			h2 UPCOMMING CHALLENGE<br>CHAMPIONS AND REWARDS
+			- var i = 0;
+			each championNum in challenges.champions.next
+				div(class="upcomming-challenge-container")
+					div(class="image-with-text")
+						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+						div(class="image-with-text-container")
+							span(class="image-with-text-champion") #{champions[championNum].name}
+						div(class="leaderboard-item-icon-shadow")
+						img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.next[i]].id + ".png" alt='Item Icon')
+				- i++;
+
