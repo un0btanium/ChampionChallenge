@@ -41,7 +41,6 @@ router.get('/', function(req, res, next) {
                   var version = versions[1];
                   var championurl = version.url + version.version + "/img/champion/";
                   var itemurl = version.url + version.version + "/img/item/";
-                  console.log(championlist[0].champions);
                   res.render('index', {
                     "title": 'Champion Challenge',
                     "versions": versions,
