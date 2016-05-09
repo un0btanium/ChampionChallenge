@@ -74,6 +74,10 @@ The five champions are being selected with the help of the roles of the champion
 
 
 
+### Conclusion
+I would have liked to provide more features, but time was limited and i was new to many of the software used. I also would have liked to provide a lot more documentation, but i sadly am running out of time. I will be updating this Read-me file periodically.
+
+Overall, the RIOT API Challenge made a lot of fun and lead to new experiences. Future hobby projects are already planned :)
 
 
 
