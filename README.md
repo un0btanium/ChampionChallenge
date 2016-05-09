@@ -56,11 +56,11 @@ So why did i choose this type of setup? Well, a few weeks in the past i had the 
 
 ## What ist Champion Challenge?
 
-Summoners can enter challenges which run for a limited amount of time. Currently it is required to run the
+Summoners can enter challenges which run for a limited amount of time. (Currently it is required to run the
 ```
 node newChallenge.js
 ```
-for the current challenge to end and a new one to start. As a future feature, this would be cool being automated via a scheduler. Challenges should run around 2-5 days.
+for the current challenge to end and a new one to start. As a future feature, this would be cool being automated via a scheduler.) Challenges should run around 2-5 days long.
 Each challenge features 5 different champions. Once a player has entered a challenge, he has to play games with one of the featured champions and earn mastery points with them. The summoners with the most points get featured on a leaderboard on the homepage site.
 The website offers players to search their (or others) summoner names. Each summoner has a profile created and can be updated via an 'Update' button by the user (which currently has a cooldown of 30 minutes).
 
