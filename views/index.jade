@@ -40,8 +40,8 @@ block content
 						each championNum in challenges.champions.current
 							img(class="img-rounded champion-icon carousel-icon" src=championurl + champions[championNum].key + ".png" alt="Champion Image")
 				div(class="carousel-caption")
-					h1 No registration required!
-					p Search your summoner name and simply enter the current challenge.<br>Play games with the champions in rotation and earn as many champion mastery points as possible.
+					h1 Play one of the five champions!
+					p Enter the contest by searching your summoner account and play one of the five featured champions.<br>Earn champion mastery points off your games and come back, update your profile and get your earned points credited.<br>An estimated rank is shown for each champion you already earned points with.
 			div(class="item")
 				div(class="carousel-item-content-container")
 					div(class="carousel-item-content")
@@ -51,7 +51,7 @@ block content
 								img(class="img-rounded carousel-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[itemNum].id + ".png" alt='Item Icon')
 				div(class="carousel-caption")
 					h1 Collect achievements
-					p Come back after you played your games and update your profile, points and estimated rank.<br>At the end of the challenge the top #{challenges.limit} ranks receive an item which keeps track of your performance.<br>The top 10 ranks are rewarded with an rare golden version of the item.
+					p Make sure you update your points before the challenge ends (mondays).<br>At the end of the challenge the top #{challenges.limit} summoners receive an item which keeps track of their performance.<br>The top 10 ranks are rewarded with an rare golden version of the item.
 
 		a(class="left carousel-control" href="#main-carousel" role="button" data-slide="prev")
 			span(class="glyphicon glyphicon-chevron-left" aria-hidden="true")
