@@ -75,7 +75,7 @@ The five champions are being selected with the help of the roles of the champion
 
 
 ### Conclusion
-I would have liked to provide more features, but time was limited and i was new to many of the software used. I also would have liked to provide a lot more documentation, but i sadly am running out of time. I will be updating this Read-me file periodically. I also would have liked to provide a running demo on a webserver, but didnt had the time to set it up in time. (I probably will provide one after the API challenge ended.)
+I would have liked to implement more features, but time was limited and a lot of techniques and software used were new to me. I also would have liked to provide a lot more documentation, but i sadly ran out of time. I will be updating this Read-me file periodically. I also would have liked to provide a running demo on a webserver. (I probably will provide one after the API challenge ended.)
 
 Overall, the RIOT API Challenge made a lot of fun and lead to new experiences. Future hobby projects are already planned :)
 
