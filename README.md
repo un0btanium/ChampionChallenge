@@ -66,7 +66,7 @@ The website offers players to search their (or others) summoner names. Each summ
 
 Each user has their current and last challenge points and ranks shown as well as achievements in form of items. Achievements are only given out to the top 250 ranked summoners and the top 10 receive a rare golden version of the item. Achievements who cost less gold in-game are usually more rare to show up in challenges. Which means that having a Healthpotion as an achievment is super rare. In addition these achievements keep track of rank, champion and points the summoner had when he unlocked the achievement.
 
-So once a player has played a couple of games, he can update his profile and gains the champion mastery points earned. Since every summoner starts each challenge at zero points, it creates a fresh and fair competitive stage for everybody race to the top.
+Since every summoner starts each challenge at zero points, it creates a fresh and fair competitive stage for everybody to race. After playing a game, the summoner can return to his profile site and update his mastery points, receiving an estimated rank based on other players in the competition.
 
 Since five champions are featured, you are able to group up as 5 and gain extra champion mastery points through the party bonus. Performing well and winning the game makes the summoner climb the ladder.
 
