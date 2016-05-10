@@ -12,7 +12,7 @@ var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 
 var countForLoop = 0;
 var countAPICalls = 0;
 
-var callInterval = Math.ceil(10/apidata.rateLimitPer10s)*2;
+var callInterval = Math.ceil(10/apidata.rateLimitPer10s)*10;
 
 var mongodb = require('mongodb');
 var db;
@@ -30,7 +30,7 @@ if (db == null) {
 				if (err)
 					throw err
 				challenges = result[0];
-				champs = challenges.champions[challenges.current];
+				champs = challenges.champions.current;
 				champCount = champs.length;
 				main();
 			});

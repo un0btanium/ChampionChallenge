@@ -1,7 +1,8 @@
 var lolapi = require('leagueapi');
 var apidata = require('./apikey/apikey.json');
 
-var challenges = require('./custom_data/challenges.json');
+var champs;
+var champCount;
 
 lolapi.init(apidata.apikey, apidata.region);
 lolapi.setRateLimit(apidata.rateLimitPer10s, apidata.rateLimitPer10min);
@@ -14,15 +15,27 @@ var count = 0;
 
 var mongodb = require('mongodb');
 var db;
-var summonerDB;
+var summonerDB, challengeDB;
 if (db == null) {
 	mongodb.MongoClient.connect('mongodb://localhost:27017/championchallenge', function (err, database) {
 		if (err) { // ERROR DB
 			throw err
 		} else { // connection established
 			db = database;
+			challengeDB = db.collection('challenges');
 			summonerDB = db.collection('summoners');
-			getSummoners(startSummonerID, 'euw');
+			challengeDB.find().toArray(function (err, list) {
+				console.log(list);
+				if (err) {
+					db.close();
+					throw err
+				} else {
+					var challenges = list[0];
+					champs = challenges.champions.current;
+					champCount = champs.length;
+					getSummoners(startSummonerID, 'euw');
+				}
+			});
 		}
 	});
 }
@@ -90,8 +103,6 @@ function retrieveSummonerData(summonerIDs, region) {
  							else {
  								var currentPoints = [0,0,0,0,0];
 								var i = 0;
-								var champs = challenges.champions[challenges.current];
-								var champCount = champs.length;
 								championMasteries.forEach(function (championMastery, index, array) {
 									if (i < champCount) {
 										var indexChampion = champs.indexOf(championMastery.championId);
