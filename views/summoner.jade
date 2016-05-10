@@ -43,7 +43,7 @@ block content
 	div(class="challenge-body challenge-body-color")
 		div(class="challenge-container fade-in")
 			if summoner.challenge.current.start[0] == -1
-				h1(class="challenge-not-entered-text") Enter challenge
+				h1(class="challenge-not-entered-text") You need to enter the challenge first!
 			else
 				- var i = 0
 				each championNum in challenges.champions.current
