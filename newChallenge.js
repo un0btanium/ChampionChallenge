@@ -347,12 +347,10 @@ function getRandomChampions(champions) {
 		while (notFound) {
 			var rand = Math.floor(Math.random()*champions.length);
 			if (array.indexOf(rand) == -1) {
-				for (var j = 0; j < champions[rand].tags.length; j++) {
-					if (roles[i].indexOf(champions[rand].tags[j]) > -1) {
-						array[i] = champions[rand].id;
-						notFound = false;
-						break;
-					}
+				if (champions[rand].tags.length > 0 && roles[i].indexOf(champions[rand].tags[0]) > -1) {
+					array[i] = champions[rand].id;
+					notFound = false;
+					break;
 				}
 			}
 		}
