@@ -18,6 +18,10 @@ cd ChampionChallenge
 Before we do anything else, lets set our Riot API Key under /apikey/apikey.json
 Be sure to set region and rate limits.
 
+Install packages via
+```
+npm install
+```
 
 Start MongoDB via 
 ```
