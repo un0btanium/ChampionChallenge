@@ -339,6 +339,10 @@ select option {
 	left: 50%;
 	top: -18px;
 	width: 120px;
+	-ms-transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
 	color: white; 
 	font: bold 13px/0px Helvetica, sans-serif;
