@@ -120,6 +120,111 @@ You may have spotted that we are missig the '_id' value this time. The reason be
 'title' is the champion specific title. It is being show underneath the summoner names on the profile page based on which champion the summoner earned the most points with in the last challenge. Just some neat little personalisation.
 'tags' are the roles being shown in the Game Client. All champions have a primary and a secondary role. Only the primary role is being used to select champions for each new challenge. Therefore somewhat viable teams with a top-, midlaner, jungler and marksman with support are being featured every time, allowing for five man groups.
 
+Next up is the 'challenges' collection:
+```
+{
+  "_id": ObjectId("5730ee052cc0897404ea38b3"),
+  "ends": 0,
+  "limit": 250,
+  "champions" : {
+    "last": [ 59, 37, 105, 121, 42],
+    "current": [222, 60, 34, 58, 80],
+    "next": [254, 134, 18, 133, 59]
+  },
+  "items": {
+    "last": [107, 24, 133, 32, 57],
+    "current": [146, 139, 126, 25, 72],
+    "next": [53, 73, 57, 48, 92]
+  },
+  "winners": [
+    [...],
+    [...],
+    [...],
+    [...],
+    [...]
+  ]
+}
+```
+
+'_id' is the unique value every document has.
+'ends' is currrently an unused variable. In future updates this would be used to store the date and time on which the current challenge ends. This could also be used to display a countdown on the website. However, currently new challenges have to be created manually with the 'newChallenge.js' script.
+'limit' is the max rank for granting achievements. Default value is 250, but could be changed depending on how many summoners are accually participating.
+'champions' and 'items' store the ids of the champions and uids of items for the current, last and upcomming challenge. These values are being looked up in the arrays returned by the champions and items collection.
+'winners' is an array containing five arrays with summoners in it. These summoners are the top 10 ranks of the last challenge for each champion. Since summoners with the same amount of points share the same rank, there accually can be more than 10 summoners inside the arrays.
+
+Last but not least: The summoner data structure:
+```
+{
+  "_id": ObjectId("572a6b31cd9c86a418c3a53a"),
+  "namel": "misterimagined",
+  "name": "Mister Imagined",
+  "id": "1337900142",
+  "region": 0,
+  "icon": 1129,
+  "updated": 1462670182028,
+  "challenge": {
+    "current": {
+      "points": [
+        0,
+        0,
+        1200,
+        0,
+        0
+      ],
+      "start": [
+        0,
+        0,
+        2500,
+        0,
+        270
+      ],
+      "rank": [
+        0,
+        0,
+        42,
+        0,
+        0
+      ]
+    },
+    "last": {
+      "points": [
+        1318,
+        0,
+        0,
+        140,
+        0
+      ],
+      "rank": [
+        123,
+        0,
+        0,
+        745,
+        0
+      ]
+    }
+  },
+  "achievements": [
+    {
+      "i": 107,
+      "c": 59,
+      "r": 123,
+      "p": 1318
+    }
+  ]
+}
+```
+
+'_id' is the unique identifier.
+'namel' is the summoner name without white spaces and all lowercase.
+'name' is the summoner name with white spaces and capitalization.
+'id' is Riot's internal summoner identifier. This id is unique within each server.
+'region' is the server region id.  0 would be the EUW Server: ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 'oce']
+'icon' is the ingame icon id. We do not require a database for icons, because we can simple retrieve the icon image from Data Dragon with the icon id.
+'updated' is the date and time the last time someone updated the summoner. The value are the milliseconds since January 1st 1970. This is used to check if the summoner has updated his profile recently and prevents multiple update requests in a short amount of time. The server checks if the default wait time of 30 minutes have past to allow or forbid the update.
+'challenge' contains the current and last challenge stats of the summoner. Both keep track of points and rank. Since we let every summoner start at zero points, we have to store his champion mastery points once the summoner entered the challenge (stored in 'start'). If the summoner plays games we receive an equal or higher amount of points (depends if the summoner played with the champion or not), and we can subtract the start value from the current value retrieved from the Riot server. This value is then saved in 'current.points'. In our example above the played had 2500 points and after playing a game he had 3700. 3700 minus 2500 equals 1200. Based on this value we now can look through the 'summoners' database for summoners with more points. Counting those numbers and adding 1 to it and we have the current rank of the summoner. Therefore, this estimated rank does not check if multiple summoners have the same rank and share the rank, which would lead to a better rank (for example 41 instead of 42). Only the final rank calculations at the end of a challenge take this into consideration. The current rank array elements all have indexes set on them, which allows us to pretty much instantly retrieve the estimated rank (<0.1ms). 
+
+
+
 
 
 
