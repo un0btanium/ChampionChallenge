@@ -2,7 +2,7 @@
 Entry for the Riot API Challenge 2016
 by unobtanium
 
-[Website](championchallenge.net)
+[Website](http://championchallenge.net)
 
 [Pictures](http://imgur.com/a/NZqgX)
 
