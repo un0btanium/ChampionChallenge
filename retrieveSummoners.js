@@ -95,6 +95,7 @@ function retrieveSummonerData(summonerIDs, region) {
 					if (err)
  						console.log(err);
  					else if (summonerEntry.length) {
+ 						console.log(summoner.id + "skipped");
  						// SUMMONER EXISTS already (no updates)
  					} else {
  						lolapi.ChampionMastery.getChampions(summoner.id, region, function (err2, championMasteries) {
