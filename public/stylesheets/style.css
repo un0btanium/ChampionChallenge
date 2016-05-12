@@ -52,15 +52,17 @@
 
 
 .challenge-header-color {
-	background-color:#CF8836;
+	background: rgb(128, 0, 0);
+	background: rgba(160,0,0,0.7);
 }
 
 .challenge-header-text-color {
-	color: #00060F;
+	color: #ffffff;
 }
 
 .challenge-body-color {
-	background-color:#337AB7;
+	background: rgb(32, 64, 128);
+	background: rgba(32,64,128,0.7);
 }
 
 .champion-container-color {
@@ -506,7 +508,8 @@ select option {
 
 .leaderboard-header {
 	width: 100%;
-	background-color: #A33643;
+	background: rgb(0, 0, 0);
+	background: rgba(128,0,0,0.7);
 	border-top-right-radius: 20px;
 	border-top-left-radius: 20px;
 }
@@ -581,18 +584,20 @@ table thead tr th {
 }
 
 .results-header-text {
-	margin: 25px;
+	margin: 15px;
 	color: white;
 	font: bold 30px/16px Helvetica, sans-serif;
+	line-height: 125%;
 }
 
 .upcomming-challenge {
-	background-color: #A33643;
+	background: rgb(0, 0, 0);
+	background: rgba(128,0,0,0.7);
 	border-radius: 20px;
 }
 
 .upcomming-challenge h2 {
-	color: black;
+	color: white;
 }
 
 .upcomming-challenge-container {
@@ -607,6 +612,12 @@ table thead tr th {
 
 
 /* FAQ */
+
+
+.faq-body-color {
+	background: rgb(32, 128, 200);
+	background: rgba(32,128,200,0.7);
+}
 
 .faq-container {
 	display: inline-block;
@@ -639,7 +650,7 @@ table thead tr th {
 }
 
 .faq-question p {
-	color: #00060F;
+	color: black;
 	font: Arial, sans-serif;
 	font-weight: bold;
 	line-height: 125%;
