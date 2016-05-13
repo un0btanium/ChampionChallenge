@@ -327,7 +327,7 @@ function updateSummonerDB(res, old, change, callback) {
 // RENDER
 
 function renderError(res, message, error) {
-	res.render('error', { "message": message, "error": error});
+	res.render('error', { "message": message, "error": error, "currentDate": new Date().getTime()});
 }
 
 module.exports = router;
