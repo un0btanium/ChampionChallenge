@@ -87,7 +87,8 @@ html(lang="en")
 									var timeinterval = setInterval(updateClock, 1000);
 								}
 								var offset = 0;
-								initializeClock();
+								if (#{challenges.ends} > #{currentDate})
+									initializeClock();
 				block content
 		footer(class="footer")
 			div(class="container")

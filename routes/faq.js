@@ -22,7 +22,7 @@ if (db == null) {
 router.get('/', function(req, res, next) {
   challengeDB.find().toArray( function (err, challengelist) {
     if (err)
-      res.render('error', { "message": "Server Down", "error": error, "challenges.ends": new Date().getTime() , "currentDate": new Date().getTime()});
+      res.render('error', { "message": "Server Down", "error": error, "challenges": { "ends":new Date().getTime()} , "currentDate": new Date().getTime()});
     else {
       res.render('faq', {"title": "FAQ - Champion Challenge", "challenges": challengelist[0], "currentDate": new Date().getTime()});
     }
