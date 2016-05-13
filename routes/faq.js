@@ -7,7 +7,7 @@ var mongodb = require('mongodb');
 var db;
 var challengeDB;
 
-if (db == null)
+if (db == null) {
   mongodb.MongoClient.connect('mongodb://localhost:27017/championchallenge', function (err, database) {
     if (err) { // ERROR DB
       throw err
