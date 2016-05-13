@@ -613,7 +613,7 @@ table thead tr th {
 
 .current-challenge {
 	background: rgb(0, 0, 0);
-	background: rgba(0,128,0,0.7);
+	background: rgba(0,102,34,0.8);
 	border-radius: 20px;
 	width: 47.5%;
 	display: inline-block;
