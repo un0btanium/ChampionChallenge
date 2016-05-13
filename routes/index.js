@@ -49,7 +49,8 @@ router.get('/', function(req, res, next) {
                     "items": itemlist,
                     "regions": regions,
                     "championurl": championurl,
-                    "itemurl": itemurl
+                    "itemurl": itemurl,
+                    "currentDate": new Date().getTime()
                   });
                 }
               });

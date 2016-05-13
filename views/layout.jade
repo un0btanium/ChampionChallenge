@@ -7,6 +7,7 @@ html(lang="en")
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
 		script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+
 	body(class="background-color" ng-app="")
 		div(id="wrap")
 			div(id="main" class="container clear-top")
@@ -44,6 +45,49 @@ html(lang="en")
 									div(class="input-group-btn")
 										button(class="btn btn-primary" id="button-input" type="submit")
 											span(class="glyphicon glyphicon-search")
+							div(class="nav navbar-nav navbar-right")
+								div(id="countdown")
+									span(class="days") 0
+									span :
+									span(class="hours") 00
+									span :
+									span(class="minutes") 00
+									span :
+									span(class="seconds") 00
+							script(type="text/javascript").
+								function getTimeRemaining(){
+									var t = Math.floor((#{challenges.ends} - #{currentDate})/1000)-offset++;
+									var seconds = Math.floor( t % 60 );
+									var minutes = Math.floor( (t/60) % 60 );
+									var hours = Math.floor( (t/(60*60)) % 24 );
+									var days = Math.floor( t/(60*60*24) );
+									return { 'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds };
+								}
+								function initializeClock() {
+									var clock = document.getElementById('countdown');
+									var daysSpan = clock.querySelector('.days');
+									var hoursSpan = clock.querySelector('.hours');
+									var minutesSpan = clock.querySelector('.minutes');
+									var secondsSpan = clock.querySelector('.seconds');
+
+									function updateClock() {
+										var t = getTimeRemaining();
+
+										daysSpan.innerHTML = t.days;
+										hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+										minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+										secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+										if (t.total <= 0) {
+											clearInterval(timeinterval);
+										}
+									}
+
+									updateClock();
+									var timeinterval = setInterval(updateClock, 1000);
+								}
+								var offset = 0;
+								initializeClock();
 				block content
 		footer(class="footer")
 			div(class="container")

@@ -144,7 +144,8 @@ function renderSummonerData(res, summoner) {
 										"updateAvailable":(summoner.updated+cooldown < new Date().getTime()),
 										"challenges": challengelist[0],
 										"champions": championlist[0].champions,
-										"items": itemlist
+										"items": itemlist,
+                    					"currentDate": new Date().getTime()
 									});
 								}
 							});

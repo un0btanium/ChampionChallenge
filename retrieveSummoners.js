@@ -25,7 +25,6 @@ if (db == null) {
 			challengeDB = db.collection('challenges');
 			summonerDB = db.collection('summoners');
 			challengeDB.find().toArray(function (err, list) {
-				console.log(list);
 				if (err) {
 					db.close();
 					throw err

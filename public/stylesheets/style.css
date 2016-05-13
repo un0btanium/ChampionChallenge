@@ -176,6 +176,16 @@ select option {
 	border-top-right-radius: 7pt;
 }
 
+/* COUNTDOWN */
+
+#countdown {
+	color: white;
+	font: bold 30px/16px Helvetica, sans-serif;
+	display: inline-block;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
 
 
 /* ALERT */
@@ -608,6 +618,7 @@ table thead tr th {
 .upcomming-challenge-container div {
 	margin-bottom: 10px;
 }
+
 
 
 
