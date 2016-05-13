@@ -24,9 +24,9 @@
 }
 
 .navbar-color {
-	background-color: #A33643;
-	border-color: #6E0A16;
-	border-width: 2px;
+	background-color: #006622;
+	border-color: #004d1a;
+	border-width: 4px;
 }
 
 .profile-body-color {
@@ -125,16 +125,15 @@ hr {
 /* NAV BAR */
 
 .navbar-default {
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
 	margin-bottom: 0px;
 }
-
 
 /* NAV BAR LINKS */
 
 .navbar-default .navbar-nav > li > a:visited, .navbar-default .navbar-nav > li > a:link {
-	background-color: #337AB7;
+	background-color: #cc0000;
 	color: #FFFFFF;
 	text-transform: uppercase;
 	text-align: center;
@@ -146,20 +145,23 @@ hr {
 	margin-left: 10px;
 	border-radius: 7px;
 	height: 35px;
-	margin-top: 7px;
+	margin-top: 8px;
 	line-height: 6px;
+	box-shadow: 0pt -1pt 5pt 1pt #660000;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	background: #A5B0C4;
+	background: #ff4d4d;
 	color: #000000;
+	top: -2px;
+	box-shadow: 0pt 0pt 4pt 2pt #660000;
 }
 
 
 /* SEARCH BAR */
 
 select option {
-	background-color: #337AB7;
+	background-color: #006622;
 	color: #ffffff;
 	font-size: 15pt;
 	font-family: "Times New Roman", sans-serif;
@@ -179,7 +181,7 @@ select option {
 /* COUNTDOWN */
 
 #countdown {
-	color: white;
+	color: orange;
 	font: bold 30px/16px Helvetica, sans-serif;
 	display: inline-block;
 	margin-top: 15px;
@@ -604,10 +606,29 @@ table thead tr th {
 	background: rgb(0, 0, 0);
 	background: rgba(128,0,0,0.7);
 	border-radius: 20px;
+	width: 47.5%;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+.current-challenge {
+	background: rgb(0, 0, 0);
+	background: rgba(0,128,0,0.7);
+	border-radius: 20px;
+	width: 47.5%;
+	display: inline-block;
+	margin-bottom: 20px;
 }
 
 .upcomming-challenge h2 {
+	padding-top: 15px;
 	color: white;
+}
+
+.current-challenge h2 {
+	padding-top: 15px;
+	color: black;
+	text-decoration: bold;
 }
 
 .upcomming-challenge-container {
@@ -616,7 +637,7 @@ table thead tr th {
 }
 
 .upcomming-challenge-container div {
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 
@@ -627,7 +648,7 @@ table thead tr th {
 
 .faq-body-color {
 	background: rgb(32, 128, 200);
-	background: rgba(32,128,200,0.7);
+	background: rgba(32,128,200,0.8);
 }
 
 .faq-container {

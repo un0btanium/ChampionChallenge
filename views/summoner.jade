@@ -47,7 +47,7 @@ block content
 			else
 				- var i = 0
 				each championNum in challenges.champions.current
-					div(class="champion-container champion-container-color champion-container-border-" + i)
+					div(class="champion-container champion-container-color champion-container-border-2")
 						div(class="image-with-text")
 							img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
 							div(class="image-with-text-container")
@@ -67,7 +67,7 @@ block content
 		div(class="challenge-container fade-in")
 			- var i = 0
 			each championNum in challenges.champions.last
-				div(class="champion-container champion-container-color champion-container-border-" + i)
+				div(class="champion-container champion-container-color champion-container-border-2")
 					div(class="image-with-text")
 						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
 						div(class="image-with-text-container")

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	div(class="carousel slide" data-ride="carousel" id="main-carousel" data-interval="10042")
+	div(class="carousel slide" data-ride="carousel" id="main-carousel" data-interval="6042")
 		ol(class="carousel-indicators")
 			li(data-target="#main-carousel" data-slide-to="0" class="active")
 			li(data-target="#main-carousel" data-slide-to="1")
@@ -12,7 +12,7 @@ block content
 					div(class="carousel-item-content")
 						img(src="/images/badges.png")
 				div(class="carousel-caption")
-					h1 Welcome to <i>Champion Challenge</i>
+					h1 Welcome to Champion Challenge
 					p Enter now and challenge summoners all over the world!
 					form(class="form-inline form-margin" role="form" id="form" action="/" method="post")
 						div(class="input-group")
@@ -41,7 +41,7 @@ block content
 							img(class="img-rounded champion-icon carousel-icon" src=championurl + champions[championNum].key + ".png" alt="Champion Image")
 				div(class="carousel-caption")
 					h1 Play one of the five champions!
-					p Enter the contest by searching your summoner name and play one of the five featured champions.<br>Earn champion mastery points off your games and come back, update your profile and get your earned points credited.<br>An estimated rank is shown for each champion you already earned points with.
+					p Enter the contest by searching your summoner name and play one of the five featured champions.<br>Earn <b>champion mastery points</b> off your games and come back, update your profile and get your earned points credited.<br>An estimated rank is shown for each champion you already earned points with.
 			div(class="item")
 				div(class="carousel-item-content-container")
 					div(class="carousel-item-content")
@@ -51,7 +51,7 @@ block content
 								img(class="img-rounded carousel-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[itemNum].id + ".png" alt='Item Icon')
 				div(class="carousel-caption")
 					h1 Collect achievements
-					p Make sure you update your points before the challenge ends (mondays).<br>At the end of the challenge the top #{challenges.limit} summoners receive an item which keeps track of their performance.<br>The top 10 ranks are rewarded with an rare golden version of the item.
+					p Make sure you update your points before the challenge ends.<br>At the end of the challenge the <b>top #{challenges.limit} ranks</b> receive an item which keeps track of their performance.<br>The top 10 ranks are rewarded with an rare golden version of the item.
 
 		a(class="left carousel-control" href="#main-carousel" role="button" data-slide="prev")
 			span(class="glyphicon glyphicon-chevron-left" aria-hidden="true")
@@ -92,7 +92,19 @@ block content
 									td(class="leaderboard-region") #{regions[summoner.region]}
 									td #{summoner.challenge.last.points[i]}
 			- i++;
-		div(class="upcomming-challenge col-md-6")
+		div(class="current-challenge")
+			h2 CURRENT CHALLENGE<br>CHAMPIONS AND REWARDS
+			- var i = 0;
+			each championNum in challenges.champions.current
+				div(class="upcomming-challenge-container")
+					div(class="image-with-text")
+						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+						div(class="image-with-text-container")
+							span(class="image-with-text-champion") #{champions[championNum].name}
+						div(class="leaderboard-item-icon-shadow")
+						img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.current[i]].id + ".png" alt='Item Icon')
+				- i++;
+		div(class="upcomming-challenge")
 			h2 UPCOMMING CHALLENGE<br>CHAMPIONS AND REWARDS
 			- var i = 0;
 			each championNum in challenges.champions.next
