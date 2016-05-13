@@ -71,7 +71,7 @@ router.post('/', function(req, res){
 
     res.redirect('/summoner/' + regions[regionNum] + "/" + name);
   } else {
-    res.render('error', {"message": "Name required!", "error": {status: 0, stack: ""}, "currentDate": new Date().getTime()}); // ERROR name not possible/available
+    res.render('error', {"message": "Name required!", "error": {status: 0, stack: ""}, "challenges.ends": new Date().getTime(), "currentDate": new Date().getTime()}); // ERROR name not possible/available
   }
 });
 
