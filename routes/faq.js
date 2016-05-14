@@ -5,7 +5,7 @@ var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 
 
 var mongodb = require('mongodb');
 var db;
-var challengeDB;
+var challengeDB, championDB;
 
 if (db == null) {
   mongodb.MongoClient.connect('mongodb://localhost:27017/championchallenge', function (err, database) {
@@ -14,17 +14,24 @@ if (db == null) {
     } else { // connection established
       db = database;
       challengeDB = db.collection('challenges');
+      championDB = db.collection('champions');
     }
   });
 }
 
 // Update summoner (redirects to summoner afterwards)
 router.get('/', function(req, res, next) {
-  challengeDB.find().toArray( function (err, challengelist) {
-    if (err)
-      res.render('error', { "message": "Server Down", "error": error, "challenges": { "ends":new Date().getTime()} , "currentDate": new Date().getTime()});
-    else {
-      res.render('faq', {"title": "FAQ - Champion Challenge", "challenges": challengelist[0], "currentDate": new Date().getTime()});
+  championDB.find().toArray( function (err, championlist) {
+    if (err) {
+        res.render('error', { "message": "Server Down", "error": error, "challenges": { "ends": 0} , "currentDate": 0});
+    } else {
+      challengeDB.find().toArray( function (err, challengelist) {
+        if (err)
+          res.render('error', { "message": "Server Down", "error": error, "challenges": { "ends": 0} , "currentDate": 0});
+        else {
+          res.render('faq', {"title": "FAQ - Champion Challenge", "challenges": challengelist[0], "currentDate": new Date().getTime(), "champions": championlist[0].champions});
+        }
+      });
     }
   });
 });
