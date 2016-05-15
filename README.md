@@ -30,7 +30,7 @@ Start MongoDB via
 mongod -dbpath <YOUR_PATH>/ChampionChallenge/data
 ```
 
-Open a new console/terminal and execute the following javascript scripts in the given order. THEY initialize basic database structures inside MongoDB to get the website up and running. (Detailed explanation of each script can be found further below in this documentation.)
+Open a new console/terminal and execute the following javascript scripts in the given order. They initialize basic database structures inside MongoDB to get the website up and running. (Detailed explanation of each script can be found further below in this documentation.)
 ```
 node createIndexes.js
 node updateData.js
@@ -227,12 +227,77 @@ Last but not least: The summoner data structure:
 
 
 
+## Javascript Scripts
+
+The .js files comming with Champion Challenge are either mandatory or optional. In this section, i am going over each of them and let you know what they do and how they work. For all of these scripts to work, an instance of MongoDB has to run on your computer, since all of them interact with the database.
+You can run a script with Node:
+```
+node <script_name>.js
+```
+
+### createIndexes.js (required)
+This script sets important indexes in the 'summoners' database collection. I already talked about indexes and mentioned the increased performance when querying for attributes with indexes set on them. We set 13 indexes, two of which are unique:
+```
+"namel" and "region (unique)
+"id" and "region" (unique)
+
+"challenge.current.points.0"
+"challenge.current.points.1"
+"challenge.current.points.2"
+"challenge.current.points.3"
+"challenge.current.points.4"
+
+"challenge.current.start.0"
+
+"challenge.current.last.rank.0"
+"challenge.current.last.rank.1"
+"challenge.current.last.rank.2"
+"challenge.current.last.rank.3"
+"challenge.current.last.rank.4"
+```
+
+Setting indexes on name and id (plus server region) allows us to quickly find a summoner in the database.
+The challenge.current.points lets us quickly determine the estimated rank for a user.
+The challenge.current.start.0 lets us retrieve all summoners who entered the current contest since not every summoner will come back each challenge.
+The challenge.current.last.rank lets us quickly find the winner of the last challenge and display them on the main page.
+
+### updateData.js (required)
+This neat little script inserts and updates item and champion data as well as realm versions (server patch). This script should be run after every League patch to import new items, champions and updated icons for both and summoner icons.
+The data is retrieved through the static API.
+
+### newChallenge.js (required)
+If you want to start a new challenge, this script will handle the job for you. This script queries for all summoners with challenge.current.start.0 not equal to -1 in order to sort out all summoners who did not enter the challenge this time. The script has five main steps involved:
+
+Step 1: It will copy the challenge.current.points over to the challenge.last.points attribute for each summoner. It also sets the challenge.last.rank to [0,0,0,0,0]. The 0 tells the website that the summoner did not played the champion and therefore does not show the rank.
+
+Step 2: We now determine the ranks of each participating summoner. This has to be done for each champion seperatly, which is why there are five sub-steps involved. Only players with points more than zero are receiving a rank. We have a local variable rank which we will increment by one. We can sort the participating summoners by their points (descending) and check each if their points equal the previous summoner. If it does, we do not increment the rank local variable (since both summoners have the same amount of points and share the rank). Afterwards we use the achievement limit (from the challenges collection) to determine if the summoner receives an item as a reward. If the summoner does, we check if we have to update an existing item or add a new one. Afterwards we save the the changes to rank and achievements made.
+
+Step 3: This step sets a new title for the summoner depending on the champion they earned the most points with. The title will be the same title the champions has ingame e.g. 'the Loose Cannon' for Jinx. This step could have done in step 1 already, but i decided to keep each step simple and straight forward.
+
+Step 4: Last but not least we reset the challenge.current values to be ready for the next challenge.
+```
+"start": [-1,0,0,0,0]
+"points": [0,0,0,0,0]
+"rank": [0,0,0,0,0]
+```
+
+Step 5: We finally update the champions and item rewards and randomizing new ones for the next challenge. One champion for each role determined by their in-game primary role and items are being choosen via RNG with the help of their in-game gold value (the lower the less likely). Furthermore, we save the top 10 ranks of each champion in the 'winners' attribute in the collection 'challenges'. We also update the next challenge's end date in the 'ends' attribute and add 604800000 to it, which is exactly seven days in milliseconds.
+
+We then are finally done and summoners are able to see their rewards and enter the new challenge.
+If this script would have been called when the server was setup, the script would have skipped Steps 1-4 and just inserted an default challenges entry with achievement limit 250 and the date '1st January 1970' in ends (change this for your needs, there are calculaters out there who turn dates into milliseconds).
+
+### retrieveSummoners.js (optional)
+I used this script to test my database. It inserts summoners from euw into the database and let's them enter the current challenge.
+
+### updatePoints.js (optional)
+I used this script in combination with the 'retrieveSummoners.js' one. After waiting a few hours (for summoners to play games), you can run this script to update all summoners who have entered the challenge. If you want to you can use these scripts to create "fake" summoners the first few challenges to fill the leaderboards until real summoners use the website and participate in challenges. Both 'retrieveSummoners.js' and 'updatePoints.js' firea lot of API calls, so please use with caution.
 
 
-### Conclusion
-I would have liked to implement more features, but time was limited and a lot of techniques and software used were new to me. I also would have liked to provide a lot more documentation, but i sadly ran out of time. I will be updating this Read-me file periodically. I also would have liked to provide a running demo on a webserver. (I probably will provide one after the API challenge ended.)
 
-Overall, the RIOT API Challenge made a lot of fun and lead to new experiences. Future hobby projects are already planned :)
+## Conclusion
+
+I had a lot of fun working on this project. The three weeks time we had were a very short amount of time considering that i barely had any knowledge about MongoDB and Express. The main website was finished in time, but the documentation sadly was missing at the end. Even though i may not win the conest, while currently running the website, it makes me happy to see summoners checking their profiles to update their points and climb ranks and receiving that sweet item at the end of the challenge.
+Overall, the RIOT API Challenge made a lot of fun and lead to new experiences. Future hobby projects are already planned as well as keep working on this project :)
 
 
 
