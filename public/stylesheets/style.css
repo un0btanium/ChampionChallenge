@@ -461,7 +461,7 @@ select option {
 	position: relative;
 	left: 10%;
 	width: 80%;
-	margin-top: 30px;
+	margin-top: 25px;
 	min-height: 100px;
 	color: white;
 	border-radius: 40px;
@@ -480,10 +480,11 @@ select option {
     }
 }
 
-.carousel-item-content h1 {
+.carousel-caption h1 {
 	font-family: "Times New Roman", sans-serif;
-	margin-left: 15px;
-	margin-right: 15px;
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .carousel-caption p {
