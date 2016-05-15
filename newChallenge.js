@@ -268,23 +268,6 @@ function updateChallenge(callback) {
 				var nextItems = getRandomItems(items);
 				console.log("STEP 5: Next champions: " + nextChampions);
 				console.log("STEP 5: Next items: " + nextItems);
-				var entry = {
-					"ends": 0,
-					"limit": 250,
-					"champions": {
-						"last": getRandomChampions(champions),
-						"current": getRandomChampions(champions),
-						"next": getRandomChampions(champions)
-					},
-					"items": {
-						"last": getRandomItems(items),
-						"current": getRandomItems(items),
-						"next": getRandomItems(items)
-					},
-					"winners": [
-						[],[],[],[],[]
-					]
-				};
 				summonerDB.find({"challenge.last.rank.0": {$lt:11, $ne: 0}}).sort({"challenge.last.rank.0": 1}).toArray(function (err, winners1) {
 					summonerDB.find({"challenge.last.rank.1": {$lt:11, $ne: 0}}).sort({"challenge.last.rank.1": 1}).toArray(function (err2, winners2) {
 						summonerDB.find({"challenge.last.rank.2": {$lt:11, $ne: 0}}).sort({"challenge.last.rank.2": 1}).toArray(function (err3, winners3) {
@@ -295,7 +278,7 @@ function updateChallenge(callback) {
 										callback(null,'');
 									} else {
 										var winners = [winners1, winners2, winners3, winners4, winners5];
-										challengeDB.update(challenges, {$set: {"champions": {"last": challenges.champions.current, "current": challenges.champions.next, "next": nextChampions}, "items": {"last": challenges.items.current, "current": challenges.items.next, "next": nextItems}, "winners":winners}});
+										challengeDB.update(challenges, {$set: {"ends": challenges.ends + 604800000, "champions": {"last": challenges.champions.current, "current": challenges.champions.next, "next": nextChampions}, "items": {"last": challenges.items.current, "current": challenges.items.next, "next": nextItems}, "winners":winners}});
 										console.log("STEP 5 FINISHED!");
 										callback(null, '');
 									}
