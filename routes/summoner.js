@@ -26,7 +26,7 @@ if (db == null) {
 
 var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 'oce'];
 
-var cooldown = 1800000; /* half an hour cooldown for summoner profile updates */
+var cooldown = 900000; /* quarter of an hour cooldown for summoner profile updates */
 var cooldownError = Math.floor(cooldown/4); // if an error occured set the cooldown to only one quarter of the normal cooldown
 
 
