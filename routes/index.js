@@ -8,7 +8,7 @@ var leaderboard = [[],[],[],[],[]];
 
 var mongodb = require('mongodb');
 var db;
-var championDB, versionDB, challengeDB, itemDB;
+var championDB, versionDB, challengeDB, itemDB, summonerDB;
 if (db == null) {
   mongodb.MongoClient.connect('mongodb://localhost:27017/championchallenge', function (err, database) {
     if (err) { // ERROR DB
