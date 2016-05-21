@@ -41,7 +41,7 @@ if (db == null) {
 }
 
 function main() {
-	summonerDB.find({"challenge.current.start.0": -1}).limit(5000).snapshot().forEach( function (err, summoner) {
+	summonerDB.find({"challenge.current.start.0": -1}).limit(5000).snapshot().forEach( function (summoner) {
 		console.log("Loop: " + countForLoop++ + " - " + summoner.id);
 		setTimeout(function(){enterSummoner(summoner);}, callInterval*countForLoop);
 	});
