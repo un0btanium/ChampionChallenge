@@ -3,6 +3,9 @@ var router = express.Router();
 
 var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 'oce'];
 
+var leaderboardUpdated = 0;
+var leaderboard = [[],[],[],[],[]];
+
 var mongodb = require('mongodb');
 var db;
 var championDB, versionDB, challengeDB, itemDB;
@@ -16,6 +19,7 @@ if (db == null) {
       versionDB = db.collection('versions');
       challengeDB = db.collection('challenges');
       itemDB = db.collection('items');
+      summonerDB = db.collection('summoners');
     }
   });
 }
@@ -38,10 +42,41 @@ router.get('/', function(req, res, next) {
               if (err) {
                 renderError(res, "Server Error", err);
               } else {
+                  var currentDate = new Date().getTime()
                   var version = versions[1];
                   var championurl = version.url + version.version + "/img/champion/";
                   var itemurl = version.url + version.version + "/img/item/";
-                  res.render('index', {
+                  if (currentDate > leaderboardUpdated) {
+                    leaderboardUpdated = currentDate + 900000; /* update every 15 minutes */
+                    summonerDB.find({"challenge.current.points.0": {$ne: 0}}).sort({"challenge.current.points.0": -1}).limit(10).toArray(function (err, leader1) {
+                      summonerDB.find({"challenge.current.points.1": {$ne: 0}}).sort({"challenge.current.points.1": -1}).limit(10).toArray(function (err2, leader2) {
+                        summonerDB.find({"challenge.current.points.2": {$ne: 0}}).sort({"challenge.current.points.2": -1}).limit(10).toArray(function (err3, leader3) {
+                          summonerDB.find({"challenge.current.points.3": {$ne: 0}}).sort({"challenge.current.points.3": -1}).limit(10).toArray(function (err4, leader4) {
+                            summonerDB.find({"challenge.current.points.4": {$ne: 0}}).sort({"challenge.current.points.4": -1}).limit(10).toArray(function (err5, leader5) {
+                              if (err || err2 || err3 || err4 || err5) {
+                                console.log(err + "\n" + err2 + "\n" + err3 + "\n" + err4 + "\n" + err5);
+                              } else {
+                                leaderboard = [leader1, leader2, leader3, leader4, leader5];
+                              }
+                              res.render('index', {
+                                "title": 'Champion Challenge',
+                                "versions": versions,
+                                "champions": championlist[0].champions,
+                                "challenges": challengelist[0],
+                                "items": itemlist,
+                                "regions": regions,
+                                "championurl": championurl,
+                                "itemurl": itemurl,
+                                "currentDate": currentDate,
+                                "leaderboard": leaderboard
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  } else {
+                    res.render('index', {
                     "title": 'Champion Challenge',
                     "versions": versions,
                     "champions": championlist[0].champions,
@@ -50,8 +85,10 @@ router.get('/', function(req, res, next) {
                     "regions": regions,
                     "championurl": championurl,
                     "itemurl": itemurl,
-                    "currentDate": new Date().getTime()
+                    "currentDate": currentDate,
+                    "leaderboard": leaderboard
                   });
+                  }
                 }
               });
             }
@@ -71,7 +108,7 @@ router.post('/', function(req, res){
 
     res.redirect('/summoner/' + regions[regionNum] + "/" + name);
   } else {
-    res.render('error', {"message": "Name required!", "error": {status: 0, stack: ""}, "challenges": { "ends":new Date().getTime()}, "currentDate": new Date().getTime()}); // ERROR name not possible/available
+    res.render('error', {"message": "Name required!", "error": {status: 0, stack: ""}, "challenges": { "ends":0}, "currentDate": 0}); // ERROR name not possible/available
   }
 });
 

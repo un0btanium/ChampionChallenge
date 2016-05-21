@@ -62,13 +62,59 @@ block content
 
 
 	div(class="results-header")
-		h1(class="results-header-text") LAST CHALLENGE FINAL PLACEMENTS
+		h1(class="results-header-text") LEADERBOARDS
 	div(class="leaderboard-container")
-		- var i = 0; 
-		each challenge in challenges.winners
-			if (challenge.length > 0)
-				div(class="col-md-6")
-					div(class="leaderboard-header")
+		div(class="leaderboard-splitter-left-container")
+			div(class="results-header")
+				h1(class="results-header-text") CURRENT CHALLENGE
+			- var i = 0; 
+			each leader in leaderboard
+				if (leader.length > 0)
+					div(class="leaderboard-current-header")
+						div(class="leaderboard-header-element")
+							div(class="image-with-text")
+								img(class="img-rounded champion-icon" src=championurl + champions[challenges.champions.current[i]].key + ".png" alt='Champion Icon')
+								div(class="image-with-text-container")
+									span(class="image-with-text-champion") #{champions[challenges.champions.current[i]].name}
+						div(class="leaderboard-header-element")
+							div(class="leaderboard-item-icon-shadow")
+							img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.current[i]].id + ".png" alt='Item Icon')
+					table(class="table table-striped")
+						thead
+							tr
+								th(class="col-md-1") Rank
+								th(class="col-md-2") Summoner
+								th(class="col-md-1") Region
+								th(class="col-md-1") Points
+						tbody
+							- var j = 1;
+							each summoner in leader
+								tr
+									td ##{j}
+									td #{summoner.name}
+									td(class="leaderboard-region") #{regions[summoner.region]}
+									td #{summoner.challenge.current.points[i]}
+								- j++;
+				- i++;
+			div(class="current-challenge")
+				h2 CURRENT CHALLENGE<br>CHAMPIONS AND REWARDS
+				- var i = 0;
+				each championNum in challenges.champions.current
+					div(class="upcomming-challenge-container")
+						div(class="image-with-text")
+							img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+							div(class="image-with-text-container")
+								span(class="image-with-text-champion") #{champions[championNum].name}
+							div(class="leaderboard-item-icon-shadow")
+							img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.current[i]].id + ".png" alt='Item Icon')
+					- i++;
+		div(class="leaderboard-splitter-right-container")
+			div(class="results-header")
+				h1(class="results-header-text") LAST CHALLENGE
+			- var i = 0; 
+			each challenge in challenges.winners
+				if (challenge.length > 0)
+					div(class="leaderboard-last-header")
 						div(class="leaderboard-header-element")
 							div(class="image-with-text")
 								img(class="img-rounded champion-icon" src=championurl + champions[challenges.champions.last[i]].key + ".png" alt='Champion Icon')
@@ -91,29 +137,18 @@ block content
 									td #{summoner.name}
 									td(class="leaderboard-region") #{regions[summoner.region]}
 									td #{summoner.challenge.last.points[i]}
-			- i++;
-		div(class="current-challenge")
-			h2 CURRENT CHALLENGE<br>CHAMPIONS AND REWARDS
-			- var i = 0;
-			each championNum in challenges.champions.current
-				div(class="upcomming-challenge-container")
-					div(class="image-with-text")
-						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
-						div(class="image-with-text-container")
-							span(class="image-with-text-champion") #{champions[championNum].name}
-						div(class="leaderboard-item-icon-shadow")
-						img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.current[i]].id + ".png" alt='Item Icon')
 				- i++;
-		div(class="upcomming-challenge")
-			h2 UPCOMMING CHALLENGE<br>CHAMPIONS AND REWARDS
-			- var i = 0;
-			each championNum in challenges.champions.next
-				div(class="upcomming-challenge-container")
-					div(class="image-with-text")
-						img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
-						div(class="image-with-text-container")
-							span(class="image-with-text-champion") #{champions[championNum].name}
-						div(class="leaderboard-item-icon-shadow")
-						img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.next[i]].id + ".png" alt='Item Icon')
-				- i++;
+			
+			div(class="upcomming-challenge")
+				h2 UPCOMMING CHALLENGE<br>CHAMPIONS AND REWARDS
+				- var i = 0;
+				each championNum in challenges.champions.next
+					div(class="upcomming-challenge-container")
+						div(class="image-with-text")
+							img(class="img-rounded champion-icon" src=championurl + champions[championNum].key + ".png" alt='Champion Icon')
+							div(class="image-with-text-container")
+								span(class="image-with-text-champion") #{champions[championNum].name}
+							div(class="leaderboard-item-icon-shadow")
+							img(class="img-rounded leaderboard-item-icon" src=versions[0].url + versions[0].version +"/img/item/" + items[challenges.items.next[i]].id + ".png" alt='Item Icon')
+					- i++;
 

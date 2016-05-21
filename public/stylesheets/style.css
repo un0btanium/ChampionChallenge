@@ -519,7 +519,47 @@ select option {
     border-radius: 15px;
 }
 
-.leaderboard-header {
+.leaderboard-container {
+	width: 100%;
+	display: inline-block;
+}
+
+.leaderboard-splitter-left-container {
+	width:47%;
+	float:left;
+}
+
+.leaderboard-splitter-right-container {
+	width:47%;
+	float:right;
+}
+
+
+@media screen and (max-width: 1024px) {
+	.leaderboard-container {
+		width: 75%;
+		display: inline-block;
+	}
+	.leaderboard-splitter-left-container {
+		width: 100%;
+		float: none;
+	}
+	.leaderboard-splitter-right-container {
+		width: 100%;
+		float: none;
+	}
+}
+
+
+.leaderboard-current-header {
+	width: 100%;
+	background: rgb(0, 0, 0);
+	background: rgba(0,128,0,0.7);
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+}
+
+.leaderboard-last-header {
 	width: 100%;
 	background: rgb(0, 0, 0);
 	background: rgba(128,0,0,0.7);
@@ -606,19 +646,21 @@ table thead tr th {
 .upcomming-challenge {
 	background: rgb(0, 0, 0);
 	background: rgba(128,0,0,0.7);
+	width: 100%;
 	border-radius: 20px;
-	width: 47.5%;
 	display: inline-block;
-	margin: 15px;
+	margin-top: 15px;
+	margin-bottom: 50px;
 }
 
 .current-challenge {
 	background: rgb(0, 0, 0);
 	background: rgba(0,102,34,0.8);
+	width: 100%;
 	border-radius: 20px;
-	width: 47.5%;
 	display: inline-block;
-	margin: 15px;
+	margin-top: 15px;
+	margin-bottom: 50px;
 }
 
 .upcomming-challenge h2 {
