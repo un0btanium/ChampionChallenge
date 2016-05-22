@@ -233,7 +233,7 @@ function initChallenges() {
 				var champions = championlist[0].array;
 				var entry = {
 					"ends": 0,
-					"limit": 250,
+					"limit": 50,
 					"champions": {
 						"last": getRandomChampions(champions),
 						"current": getRandomChampions(champions),
@@ -329,7 +329,7 @@ function getRandomChampions(champions) {
 		var notFound = true;
 		while (notFound) {
 			var rand = Math.floor(Math.random()*champions.length);
-			if (array.indexOf(rand) == -1) {
+			if (array.indexOf(champions[rand].id) == -1) {
 				if (champions[rand].tags.length > 0 && roles[i].indexOf(champions[rand].tags[0]) > -1) {
 					array[i] = champions[rand].id;
 					notFound = false;

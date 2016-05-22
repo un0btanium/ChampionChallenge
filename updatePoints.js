@@ -12,7 +12,7 @@ var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 
 var countForLoop = 0;
 var countAPICalls = 0;
 
-var callInterval = Math.ceil(10/apidata.rateLimitPer10s)*10;
+var callInterval = Math.ceil(10/apidata.rateLimitPer10s)*20;
 
 var mongodb = require('mongodb');
 var db;
