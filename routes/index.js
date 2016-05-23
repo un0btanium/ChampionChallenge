@@ -24,6 +24,13 @@ if (db == null) {
   });
 }
 
+
+// RIOT.TXT
+router.get('/riot.txt', function(req, res, next) {
+  var file = 'riot.txt';
+  res.download(file);
+});
+
 // INDEX
 router.get('/', function(req, res, next) {
   versionDB.find().toArray( function (err, versions) {
