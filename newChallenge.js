@@ -59,7 +59,7 @@ function createLeaderboard() {
 			var i = 0;
 			var bulk = summonerDB.initializeUnorderedBulkOp();
 			console.log("\nSTEP 1! Copy points from 'current' to 'last' and reset rank!");
-			summonerDB.find({"challenge.current.start.0": {$gt: -1}},{timeout: false}).snapshot(true).forEach( function (summoner) {
+			summonerDB.find({},{timeout: false}).snapshot(true).forEach( function (summoner) {
 				
 				bulk.find({"id": summoner.id, "region": summoner.region}).updateOne({ $set: {"challenge.last.points": summoner.challenge.current.points, "challenge.last.rank": [0,0,0,0,0]}});
 				i++;
