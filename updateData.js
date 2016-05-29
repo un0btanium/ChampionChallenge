@@ -81,7 +81,7 @@ function getItems() {
 
 function setItem(item, version) {
 	if (item.maps != null && item.maps[11] == true && (item.inStore == null || item.inStore == true) && item.name.indexOf("Enchantment:") == -1 && item.name.indexOf("(Trinket)") == -1 && item.gold.total != null && item.gold.total > 0) {
-		var a = itemDB.find({"id": item.id}).toArray( function (err3, item2) {
+		itemDB.find({"id": item.id}).toArray( function (err3, item2) {
 			if (err3) {
 				console.log(err3);
 			} else if (item2.length) { // ITEM ID EXISTS
