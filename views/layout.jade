@@ -86,6 +86,8 @@ html(lang="en")
 									updateClock();
 									var timeinterval = setInterval(updateClock, 1000);
 								}
+								if (#{backgroundurl != null})
+									document.body.style.backgroundImage = "url('#{backgroundurl}')";
 								var offset = 0;
 								if (#{challenges.ends} > #{currentDate})
 									initializeClock();

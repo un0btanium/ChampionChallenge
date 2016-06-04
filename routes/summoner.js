@@ -122,10 +122,6 @@ function renderSummonerData(res, summoner) {
 				if (err) {
 					renderError(res, "Server Error", err);
 				} else {
-					var version = versions[summoner.region];
-					var iconurl = version.url + version.version + "/img/profileicon/" + summoner.icon + ".png";
-					var championurl = version.url + version.version + "/img/champion/";
-					var itemurl = version.url;
 					championDB.find().toArray(function (err2, championlist) {
 						if (err2) {
 							renderError(res, "Server Error", err);
@@ -134,6 +130,13 @@ function renderSummonerData(res, summoner) {
 								if (err3) {
 									renderError(res, "Server Error", err3);
 								} else {
+									var version = versions[summoner.region];
+									var iconurl = version.url + version.version + "/img/profileicon/" + summoner.icon + ".png";
+									var championurl = version.url + version.version + "/img/champion/";
+									var itemurl = version.url;
+									var backgroundurl;
+									if (summoner.title != 0)
+										backgroundurl = version.url + "img/champion/splash/" + championlist[0].champions[summoner.title].key + "_0.jpg";
 									res.render('summoner', {
 										"title": summoner.name + ' - Champion Challenge',
 										"summoner": summoner,
@@ -141,6 +144,7 @@ function renderSummonerData(res, summoner) {
 										"iconurl": iconurl,
 										"championurl": championurl,
 										"itemurl": itemurl,
+										"backgroundurl": backgroundurl,
 										"updateAvailable":(summoner.updated+cooldown < new Date().getTime()),
 										"challenges": challengelist[0],
 										"champions": championlist[0].champions,
