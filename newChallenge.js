@@ -13,7 +13,7 @@ var regions = ['euw', 'na', 'eune', 'br', 'jp', 'kr', 'tr', 'ru', 'lan', 'las', 
 var mongodb = require('mongodb');
 var db;
 var summonerDB, championDB, versionDB, challengeDB, itemDB;
-var max;
+var max, max2;
 var time = new Date().getTime();
 if (db == null) {
 	mongodb.MongoClient.connect('mongodb://localhost:27017/championchallenge', function (err, database) {
@@ -34,7 +34,10 @@ if (db == null) {
 					summonerDB.count({"challenge.current.start.0": {$gt: -1}}, function(err, result2) {
 						max = result2;
 						if (max > 9) { // if at least ten summoners entered the challenge
-							createLeaderboard();
+							summonerDB.find().count(function(err,amount) {
+								max2 = amount;
+								createLeaderboard();
+							})
 						} else {
 							console.log("Not enough summoners entered!");
 							db.close();
@@ -63,7 +66,7 @@ function createLeaderboard() {
 				
 				bulk.find({"id": summoner.id, "region": summoner.region}).updateOne({ $set: {"challenge.last.points": summoner.challenge.current.points, "challenge.last.rank": [0,0,0,0,0]}});
 				i++;
-				if (i == max) {
+				if (i == max2) {
 					console.log("STEP 1! Executing bulk (" + i + ")");
 					bulk.execute();
 					console.log("FINISHED STEP 1!\n");
