@@ -4,6 +4,7 @@ by unobtanium
 
 [Pictures](http://imgur.com/a/zVAFF)
 
+NOTE: This still uses the old RIOT API and probably doesnt work.
 
 ## Installation Guide
 
